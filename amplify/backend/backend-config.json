@@ -1,0 +1,67 @@
+{
+  "auth": {
+    "todo": {
+      "service": "Cognito",
+      "serviceType": "managed",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
+    }
+  },
+  "api": {
+    "todoapi": {
+      "resourceName": "todoapi",
+      "dependsOn": [
+        {
+          "category": "",
+          "resourceName": "NetworkStack",
+          "attributes": [
+            "ClusterName",
+            "VpcId",
+            "VpcCidrBlock",
+            "SubnetIds",
+            "VpcLinkId",
+            "CloudMapNamespaceId"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "todo",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb"
+          ]
+        }
+      ],
+      "deploymentMechanism": "FULLY_MANAGED",
+      "imageSource": {
+        "type": "CUSTOM"
+      },
+      "restrictAccess": true,
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "ElasticContainer",
+      "authName": "todo",
+      "skipHashing": false,
+      "apiType": "REST",
+      "iamAccessUnavailable": true
+    }
+  }
+}
