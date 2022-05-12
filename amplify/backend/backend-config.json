@@ -1,13 +1,15 @@
 {
   "auth": {
-    "todo": {
+    "todoc02915a1": {
       "service": "Cognito",
-      "serviceType": "managed",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
+      "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],
@@ -43,7 +45,7 @@
         },
         {
           "category": "auth",
-          "resourceName": "todo",
+          "resourceName": "todoc02915a1",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb"
@@ -58,7 +60,7 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "ElasticContainer",
-      "authName": "todo",
+      "authName": "todoc02915a1",
       "skipHashing": false,
       "apiType": "REST",
       "iamAccessUnavailable": true
